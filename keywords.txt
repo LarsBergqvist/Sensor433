@@ -1,0 +1,7 @@
+Transmitter	KEYWORD1
+sendWord	KEYWORD2
+sendFloat	KEYWORD2
+Receiver	KEYWORD1
+hasNewData	KEYWORD2
+getData		KEYWORD2
+ReceivedMessage	KEYWORD1
