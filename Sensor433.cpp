@@ -71,37 +71,29 @@ word Transmitter::encodeFloatToTwoBytes(float floatValue)
 // Receiver class
 //
 
-unsigned long prevValue = 0;
-int numIdenticalInRow = 0;
-ReceivedMessage receivedMessage = { 0, 0, 0.0 };
 
-Receiver::Receiver(byte receiverPin)
+Receiver::Receiver(byte receiverInteruptNumber)
 {
-  rc.enableReceive(receiverPin);
+  rc.enableReceive(receiverInteruptNumber);  
 }
 
+ReceivedMessage receivedMessage = { 0, 0, 0.0 };
 ReceivedMessage Receiver::getData()
 {
   return receivedMessage;
 }
 
+unsigned long prevValue = 0;
+int numIdenticalInRow = 0;
+
 bool Receiver::hasNewData()
 {
   if (!rc.available())
     return false;
-    
+  
   unsigned long newValue = rc.getReceivedValue();
   if (newValue == 0)
     return false;
-
-  if (newValue == prevValue)
-  {
-    numIdenticalInRow++;
-  }
-  else
-  {
-    numIdenticalInRow = 0;
-  }
 
   // Get the different parts of the 32-bit / 4-byte value
   // that has been read over 433MHz
@@ -115,6 +107,15 @@ bool Receiver::hasNewData()
   
   if ((calculatedCheckSum == checksum) && (seq <= 15))
   {
+    if (newValue == prevValue)
+    {
+      numIdenticalInRow++;
+    }
+    else
+    {
+      numIdenticalInRow = 0;
+    }
+    
     prevValue = newValue;
 
     // Require at least two readings of the same value in a row
@@ -125,10 +126,13 @@ bool Receiver::hasNewData()
       receivedMessage.sensorId = sensorId;
       receivedMessage.dataAsWord = sensordata;
       receivedMessage.dataAsFloat = decodeTwoBytesToFloat(sensordata);
+      return true;
     }
   }
 
-  return true;
+  rc.resetAvailable();
+
+  return false;
 }
 
 float Receiver::decodeTwoBytesToFloat(word twoBytes)

@@ -60,7 +60,8 @@ namespace Sensor433
     RCSwitch rc = RCSwitch();
     
     public:
-      Transmitter(byte transmitterPin);    
+      Transmitter(byte transmitterPin);
+      void begin();   
       void sendWord(byte sensorId, word data);
       void sendFloat(byte sensorId, float data);
   
@@ -87,14 +88,13 @@ namespace Sensor433
     RCSwitch rc = RCSwitch();
   
     public:
-      Receiver(byte receiverPin);
-  
+      Receiver(byte receiverInteruptNumber);
       bool hasNewData();
       ReceivedMessage getData();
   
     private:
       float decodeTwoBytesToFloat(word twoBytes);
-  };
+};
 
 }
 #endif
