@@ -42,11 +42,10 @@ void Transmitter::sendFloat(byte sensorId, float data)
 unsigned long Transmitter::encode32BitsToSend(byte sensorId, byte seq, word data)
 {
     byte checkSum = sensorId + seq + data;
-    byte byte3 = ((0x0F & sensorId) << 4) + (0x0F & seq);
-    word byte2_and_byte_1 = 0xFFFF & data;
+    unsigned long byte3 = ((0x0F & sensorId) << 4) + (0x0F & seq);
+    unsigned long byte2_and_byte_1 = 0xFFFF & data;
     byte byte0 = 0xFF & checkSum;
     unsigned long dataToSend = (byte3 << 24) + (byte2_and_byte_1 << 8) + byte0;
-
     return dataToSend;
 }
 
