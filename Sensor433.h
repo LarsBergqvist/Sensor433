@@ -88,7 +88,7 @@ namespace Sensor433
     RCSwitch rc = RCSwitch();
   
     public:
-      Receiver(byte receiverInteruptNumber);
+      Receiver(byte receiverInterruptNumber);
       bool hasNewData();
       ReceivedMessage getData();
   
