@@ -12,6 +12,7 @@ install:
   - arduino --install-library "rc-switch"
 script:
   - arduino --verify --board arduino:avr:uno $PWD/examples/receiver_simple/receiver_simple.ino
+  - arduino --verify --board arduino:avr:uno $PWD/examples/transmitter_simple/transmitter_simple.ino
 notifications:
   email:
     on_success: change
