@@ -56,13 +56,13 @@ word Transmitter::encodeFloatToTwoBytes(float floatValue)
   if (floatValue < 0) 
     sign=true;  
       
-  int integer = (100*fabs(floatValue));
-  unsigned int word = integer & 0XFFFF;
+  int times100 = (100*fabs(floatValue));
+  unsigned int twoBytes = times100 & 0X7FFF;
   
   if (sign)
-    word |= 1 << 15;
+    twoBytes |= 1 << 15;
 
-  return word;
+  return twoBytes;
 }
 
 
@@ -71,9 +71,9 @@ word Transmitter::encodeFloatToTwoBytes(float floatValue)
 //
 
 
-Receiver::Receiver(byte receiverInteruptNumber)
+Receiver::Receiver(byte receiverInterruptNumber)
 {
-  rc.enableReceive(receiverInteruptNumber);  
+  rc.enableReceive(receiverInterruptNumber);  
 }
 
 ReceivedMessage receivedMessage = { 0, 0, 0.0 };
@@ -150,4 +150,3 @@ float Receiver::decodeTwoBytesToFloat(word twoBytes)
 }
 
 }
-
