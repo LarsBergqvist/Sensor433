@@ -8,7 +8,6 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 #include <Sensor433.h>
-#include <Narcoleptic.h>
 
 //
 // Data transmission setup
@@ -61,11 +60,7 @@ void loop(void)
   transmitter.sendFloat(GARDEN_TEMP_ID,gardenTemp);
   transmitter.sendFloat(SOIL_TEMP_ID,soilTemp);
 
-  for (int i=0; i< 100; i++)
-  {
-    // Max narcoleptic delay is 8s
-    Narcoleptic.delay(8000);
-  }
+  delay(1000*60);
 }
 
 
