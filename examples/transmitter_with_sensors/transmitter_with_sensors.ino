@@ -1,7 +1,6 @@
 //
 // An Arduino sketch for an IoT node that sends sensor values via 433 MHz radio
 // The Sensor433/RCSwitch library is used for the transmissions
-// The Narcopleptic library is used for power save during delay
 // Sensor values are fetched from two DallasTemp sensors on a common OneWire bus
 // 
 
