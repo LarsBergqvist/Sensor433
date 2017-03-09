@@ -9,7 +9,9 @@ before_install:
   - sudo ln -s /usr/local/share/arduino/arduino /usr/local/bin/arduino
 install:
   - ln -s $PWD /usr/local/share/arduino/libraries/Sensor433
-  - arduino --install-library "rc-switch, OneWire, DallasTemperature"
+  - arduino --install-library "rc-switch"
+  - arduino --install-library "OneWire"
+  - arduino --install-library "DallasTemperature"
 script:
   - arduino --verify --board arduino:avr:uno $PWD/examples/receiver_simple/receiver_simple.ino
   - arduino --verify --board arduino:avr:uno $PWD/examples/transmitter_simple/transmitter_simple.ino
