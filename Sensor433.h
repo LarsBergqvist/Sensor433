@@ -54,7 +54,7 @@ namespace Sensor433
   // Transmitter class
   //
   
-  class Transmitter
+  c lass Transmitter
   {
     byte seq;
     RCSwitch rc = RCSwitch();
