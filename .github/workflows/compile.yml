@@ -1,0 +1,23 @@
+name: Sketch compile
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: arduino/compile-sketches@v1
+      with:
+        sketch-paths: |
+          - ./
+        libraries: |
+          - name rc-switch
+          - name DallasTemperature
+          - name OneWire
