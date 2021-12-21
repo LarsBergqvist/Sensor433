@@ -18,6 +18,9 @@ jobs:
         sketch-paths: |
           - ./
         libraries: |
-          - name rc-switch
-          - name DallasTemperature
-          - name OneWire
+          - name: rc-switch
+            version: 2.6.2
+          - name: DallasTemperature
+            version: 3.7.6
+          - name: OneWire
+            version: 2.3.3
